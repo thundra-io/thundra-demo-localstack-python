@@ -20,14 +20,13 @@ install:            ## Install dependencies
 
 test:               ## Test app
 	echo "Building Serverless app ..."
-	pytest -s --thundra tests
+	pytest -s tests
 
 deploy:             ## Deploy the app locally
 	echo "Deploying Serverless app to local environment ..."
 	SLS_DEBUG=1 serverless deploy --stage local --region ${AWS_DEFAULT_REGION}
 
 start:              ## Build, deploy and start the app locally
-	# @make build;
 	@make deploy;
 
-.PHONY: usage install deploy start   # usage install build test deploy start
+.PHONY: usage install deploy test start   # usage install test deploy start

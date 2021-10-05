@@ -1,6 +1,4 @@
-org: gokhansimsek
-app: thundra_demo_localstack
-service: thundra_demo_localstack
+service: thundra-demo-localstack
 
 frameworkVersion: '2'
 
@@ -22,6 +20,8 @@ custom:
       - local
     debug: true
     autostart: true  # optional - Start LocalStack in Docker on Serverless deploy
+  pythonRequirements:
+    dockerizePip: true
 
 provider:
   name: aws
@@ -31,8 +31,6 @@ provider:
   region: ${self:custom.region}
   memorySize: ${opt:memory, 512}
   timeout: ${opt:timeout, 60}
-  pythonRequirements:
-    dockerizePip: true
   deploymentBucket:
     name: ${self:custom.deploymentBucketName}
   environment:
@@ -47,6 +45,8 @@ provider:
 
 package:
   excludeDevDependencies: true
+  patterns:
+    - '!Makefile'
 
 functions:
   http_handleRequest:
@@ -63,14 +63,14 @@ functions:
     events:
       - sqs:
           arn:
-            Fn:GetAtt: [requestQeueu, Arn]
+            Fn::GetAtt: [requestQueue, Arn]
   backend_archiveResult:
     handler: ./thundra_demo_localstack/handler/archive_handler.handler
     events:
       - sns:
           arn:
             Fn::GetAtt: [requestTopic, Arn]
-            topicName: ${self:custom.topicName}
+          topicName: ${self:custom.topicName}
     environment:
       THUNDRA_AGENT_TRACE_SPAN_LISTENERCONFIG: ${env:THUNDRA_DYNAMODB_CHAOS}
       THUNDRA_AGENT_TRACE_INSTRUMENT_TRACEABLECONFIG: ${env:THUNDRA_AGENT_TRACE_INSTRUMENT_TRACEABLECONFIG}
