@@ -17,7 +17,6 @@ def eventually(get_request_url, deadline_in_sec = 10, task_run_freq_in_sec = 10)
         return res
 
     deadline = int(time.time()) + deadline_in_sec
-    print("deadline: ", deadline)
     expect_error = None
     res = False
 
@@ -42,7 +41,7 @@ def module_fixture():
         "make deploy",
         {
             "env": {
-                # "THUNDRA_DYNAMODB_CHAOS": json.dumps(dynamo_db_chaos),
+                "THUNDRA_DYNAMODB_CHAOS": json.dumps(dynamo_db_chaos),
                 **os.environ
             }
         }
