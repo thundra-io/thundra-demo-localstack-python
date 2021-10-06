@@ -47,6 +47,7 @@ package:
   excludeDevDependencies: true
   patterns:
     - '!Makefile'
+    - '!localstack.env'
     
 functions:
   http_handleRequest:

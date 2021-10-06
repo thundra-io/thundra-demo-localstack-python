@@ -89,9 +89,9 @@ def list_requests_by_request_id(path_parameters=None, **opts):
 
 
 def process_request(request_id):
-    # delay(4000)
+    delay(4)
     add_app_request(request_id, AppRequestItemStatus.PROCESSING)
-    # delay(5000)
+    delay(5)
     send_app_request_notification(request_id)
 
 
@@ -103,12 +103,12 @@ def archive_request(request_id):
     
     params = {
         "Bucket": EnvironmentConfig.ARCHIVE_BUCKET_NAME,
-        "Key": f"/result.txt{request_id}",
+        "Key": f"result.txt{request_id}",
         "Body": json.dumps({
             "context": f"Archive result for request {request_id}"
         }),
         "ContentType": "application/json"
     }
     s3_put_object(params)
-    # delay(3000)
+    delay(3)
     add_app_request(request_id, AppRequestItemStatus.FINISHED)

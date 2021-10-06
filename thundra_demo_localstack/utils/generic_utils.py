@@ -7,8 +7,8 @@ def generate_uuid():
 def generate_short_uuid():
     return generate_uuid()[:8]
 
-def delay(ms):
-    time.sleep(ms)
+def delay(sec=0.1):
+    time.sleep(sec)
 
 def execute_command(cmd_str, opts={}):
     cmd_list = cmd_str.strip().split(" ")
