@@ -1,0 +1,2 @@
+-r common.txt
+thundra @ file:///Users/gokhansimsek/Desktop/thundra-agent-python/dist/thundra-2.7.0.tar.gz

@@ -1,7 +1,6 @@
 from thundra_demo_localstack.service import archive_request
 import json
 def handler(event, context):
-    print("archive-handler: ", event, context)
     records = event.get("Records", None)
     if not records:
         return

@@ -13,18 +13,17 @@ Handlers = {
 def generate_request_content(event, action):
     params = None
     result = None
-    if ("pathParameters" in event):
+    if "pathParameters" in event and event["pathParameters"]:
         params = dict()
-        params["pathParameters"] = event["pathParameters"]
+        params = event["pathParameters"]
     
     if not params:
         result = action()
     else:
-        result = action(**params)
+        result = action(path_parameters=params)
     return result
 
 def handler(event, context):
-    print("app-handler: ", event, context)
     resource = event["resource"]
     http_method = event["httpMethod"]
     handler_key = http_method + resource

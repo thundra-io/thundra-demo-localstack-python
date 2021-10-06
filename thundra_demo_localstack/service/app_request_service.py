@@ -8,15 +8,15 @@ def add_app_request(request_id, status):
 
     def put_item_to_dynamodb(item):
         try:
-            dynamo_db_client.put_item(
+            response = dynamo_db_client.put_item(
                 TableName=EnvironmentConfig.APP_REQUESTS_TABLE_NAME,
-                Item= item
+                Item=item
             )
         except Exception as e:
             print("Error in put_item_to_dynamodb", e)
 
     item = {
-        "requestId": {"S": f"${request_id}"},
+        "requestId": {"S": f"{request_id}"},
         "timestamp": {"S": f"{get_current_time()}"},
         "status": {"S": f"{status}"}
     }
@@ -35,7 +35,6 @@ def get_app_request(request_id):
             }
         )
         return result
-
     return get_item_from_dynamodb()
 
 def send_app_request_notification(request_id):
@@ -90,14 +89,13 @@ def list_requests_by_request_id(path_parameters=None, **opts):
 
 
 def process_request(request_id):
-    delay(4000)
+    # delay(4000)
     add_app_request(request_id, AppRequestItemStatus.PROCESSING)
-    delay(5000)
+    # delay(5000)
     send_app_request_notification(request_id)
 
 
 def archive_request(request_id):
-    
     
     def s3_put_object(params):
         s3_client.put_object(**params)
@@ -112,5 +110,5 @@ def archive_request(request_id):
         "ContentType": "application/json"
     }
     s3_put_object(params)
-    delay(3000)
+    # delay(3000)
     add_app_request(request_id, AppRequestItemStatus.FINISHED)

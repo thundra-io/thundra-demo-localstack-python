@@ -47,10 +47,10 @@ package:
   excludeDevDependencies: true
   patterns:
     - '!Makefile'
-
+    
 functions:
   http_handleRequest:
-    handler: ./thundra_demo_localstack/handler/app_handler.handler
+    handler: thundra_demo_localstack.handler.app_handler.handler
     events:
       - http:
           path: /request/{requestId}
@@ -59,13 +59,13 @@ functions:
           path: /requests
           method: post
   backend_processRequest:
-    handler: ./thundra_demo_localstack/handler/processing_handler.handler
+    handler: thundra_demo_localstack.handler.processing_handler.handler
     events:
       - sqs:
           arn:
             Fn::GetAtt: [requestQueue, Arn]
   backend_archiveResult:
-    handler: ./thundra_demo_localstack/handler/archive_handler.handler
+    handler: thundra_demo_localstack.handler.archive_handler.handler
     events:
       - sns:
           arn:
