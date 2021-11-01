@@ -21,7 +21,7 @@ install:            ## Install dependencies
 
 test:               ## Test app
 	echo "Building Serverless app ..."
-	pytest -s --thundra tests
+	pytest -s tests
 
 deploy:             ## Deploy the app locally
 	echo "Deploying Serverless app to local environment ..."

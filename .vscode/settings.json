@@ -1,7 +1,6 @@
 {
     "python.testing.pytestArgs": [
         "-s",
-        "--thundra",
         "tests"
     ],
     "python.testing.unittestEnabled": false,
