@@ -1,5 +1,7 @@
 from thundra_demo_localstack.service import archive_request
 import json
+from thundra.plugins.trace.traceable import Traceable
+@Traceable(trace_line_by_line=True, trace_local_variables=True, trace_lines_with_source=True)
 def handler(event, context):
     records = event.get("Records", None)
     if not records:

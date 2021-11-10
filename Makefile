@@ -4,11 +4,9 @@ export AWS_SECRET_ACCESS_KEY ?= test
 export AWS_DEFAULT_REGION ?= us-east-1
 export START_WEB ?= 1
 export THUNDRA_AGENT_DEBUG_ENABLE = true 
-export THUNDRA_APIKEY = 6327942a-36ff-40a5-a840-98e71cc2af7e
-export THUNDRA_AGENT_TEST_PROJECT_ID = 91596bb4-f5cf-4c28-9008-7eead02bd70f
-export THUNDRA_AGENT_REPORT_REST_BASEURL = https://collector.thundra.me/v1
+export THUNDRA_APIKEY = <your_api_key>
+export THUNDRA_AGENT_TEST_PROJECT_ID = <your_test_project_id>
 export THUNDRA_AGENT_APPLICATION_NAME = thundra-demo-localstack-python
-export THUNDRA_AGENT_TRACE_INSTRUMENT_TRACEABLECONFIG = thundra_demo_localstack.handler.*.*[traceLineByLine=true]
 
 usage:              ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
@@ -20,7 +18,15 @@ install:            ## Install dependencies
 	which awslocal   || pip install awscli-local
 
 test:               ## Test app
-	echo "Building Serverless app ..."
+	echo "Create virtual environment...";
+	virtualenv .venv;
+	echo "Activate virtual env...";
+	source .venv/bin/activate;
+	echo "Install localstack and serverless...";
+	@make install
+	echo "Install development requirements...";
+	pip install -r ./requirements/dev.txt;
+	echo "Starting tests...";
 	pytest -s tests
 
 deploy:             ## Deploy the app locally

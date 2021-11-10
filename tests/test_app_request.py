@@ -1,5 +1,7 @@
 import pytest, json, os, requests
 import time
+
+from requests import api
 from .config import dynamo_db_chaos
 from thundra_demo_localstack.utils import execute_command
 from thundra_demo_localstack.constants import AppRequestItemStatus
@@ -59,6 +61,7 @@ def module_fixture():
 
 def test_create_request():
     global api_gateway_url
+    assert api_gateway_url != None
     create_request_url = api_gateway_url + '/requests'
     create_request_result = requests.post(create_request_url, {})
     assert create_request_result
