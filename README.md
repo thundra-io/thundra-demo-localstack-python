@@ -11,6 +11,7 @@ Simple Node.js demo application deployed to LocalStack and monitored/traced by T
 * LocalStack
 * Docker
 * Python 3+
+* Virtualenv
 * Pip
 * `make`
 
