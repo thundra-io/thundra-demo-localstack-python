@@ -1,6 +1,6 @@
-# Thundra Node.js LocalStack Demo
+# Thundra Python LocalStack Demo
 
-Simple Node.js demo application deployed to LocalStack and monitored/traced by Thundra
+Simple Python demo application deployed to LocalStack and monitored/traced by Thundra
 
 ## API Design
 
