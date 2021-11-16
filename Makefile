@@ -3,10 +3,9 @@ export AWS_ACCESS_KEY_ID ?= test
 export AWS_SECRET_ACCESS_KEY ?= test
 export AWS_DEFAULT_REGION ?= us-east-1
 export START_WEB ?= 1
-export THUNDRA_AGENT_DEBUG_ENABLE = true 
-export THUNDRA_APIKEY = <your_api_key>
+export THUNDRA_APIKEY = <your_Thundra_apikey>
 export THUNDRA_AGENT_TEST_PROJECT_ID = <your_test_project_id>
-export THUNDRA_AGENT_APPLICATION_NAME = thundra-demo-localstack-python
+export THUNDRA_AGENT_APPLICATION_NAME = <your_application_name>
 
 usage:              ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
@@ -18,16 +17,23 @@ install:            ## Install dependencies
 	which awslocal   || pip install awscli-local
 
 test:               ## Test app
-	echo "Create virtual environment...";
-	virtualenv .venv;
-	echo "Activate virtual env...";
-	source .venv/bin/activate;
-	echo "Install localstack and serverless...";
 	@make install
-	echo "Install development requirements...";
-	pip install -r ./requirements/dev.txt;
-	echo "Starting tests...";
-	pytest -s tests
+	( \
+		echo "Creating .venv..."; \
+		virtualenv .venv; \
+		echo "Activating .venv..."; \
+		source .venv/bin/activate; \
+		echo "Upgrading pip..."; \
+		pip install --upgrade pip; \
+		echo "Installing requirements..."; \
+		pip install -r ./requirements/dev.txt; \
+		echo "Starting tests..."; \
+		pytest -s tests; \
+		rm -rf .venv; \
+		rm -rf node_modules; \
+		rm -rf .serverless; \
+		rm -rf .pytest_cache; \
+	)
 
 deploy:             ## Deploy the app locally
 	echo "Deploying Serverless app to local environment ..."
