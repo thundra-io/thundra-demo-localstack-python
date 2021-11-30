@@ -17,7 +17,6 @@ install:            ## Install dependencies
 	which awslocal   || pip install awscli-local
 
 test:               ## Test app
-	@make install
 	( \
 		echo "Creating .venv..."; \
 		virtualenv .venv; \
@@ -25,6 +24,8 @@ test:               ## Test app
 		source .venv/bin/activate; \
 		echo "Upgrading pip..."; \
 		pip install --upgrade pip; \
+		echo "Install dependencies..."; \
+		make install; \
 		echo "Installing requirements..."; \
 		pip install -r ./requirements/dev.txt; \
 		echo "Starting tests..."; \
