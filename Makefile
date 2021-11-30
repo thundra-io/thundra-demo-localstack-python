@@ -5,7 +5,7 @@ export AWS_DEFAULT_REGION ?= us-east-1
 export START_WEB ?= 1
 export THUNDRA_APIKEY = <your_Thundra_apikey>
 export THUNDRA_AGENT_TEST_PROJECT_ID = <your_test_project_id>
-export THUNDRA_AGENT_APPLICATION_NAME = <your_application_name>
+# export THUNDRA_AGENT_DEBUG_ENABLE = true
 
 usage:              ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'

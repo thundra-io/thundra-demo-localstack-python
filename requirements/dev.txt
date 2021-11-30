@@ -1,3 +1,3 @@
 -r common.txt
 python-dotenv==0.19.0
-thundra@file:///Users/gokhansimsek/Desktop/thundra-agent-python/dist/thundra-2.7.0.tar.gz
+thundra
