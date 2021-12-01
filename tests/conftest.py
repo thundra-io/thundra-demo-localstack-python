@@ -12,9 +12,7 @@
 #         "config": {
 #             "thundra.apikey": "api_key",
 #             "thundra.agent.test.project.id": "test_project_id",
-#             "thundra.agent.application.name": "foresight_deneme_genel",
 #             "thundra.agent.debug.enable": "True",
-#             "thundra.agent.report.rest.baseurl": "https://collector.thundra.me/v1",
 #         }
 #     }
 # )
