@@ -2,7 +2,7 @@
 
 # from dotenv import load_dotenv
 
-# env_path = Path('/Users/gokhansimsek/Desktop/thundra-demo-localstack-python/localstack.env')
+# env_path = Path('localstack.env')
 # load_dotenv(dotenv_path=env_path)
 
 # import thundra
