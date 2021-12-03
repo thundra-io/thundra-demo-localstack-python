@@ -1,0 +1,11 @@
+{
+  "name": "thundra_demo_localstack",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-deployment-bucket": "^1.5.1",
+    "serverless-localstack": "^0.4.35",
+    "serverless-python-requirements": "^5.1.1"
+  }
+}
